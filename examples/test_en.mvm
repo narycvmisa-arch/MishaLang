@@ -1,0 +1,23 @@
+// MVM bytecode v1 (Misha VM)
+// .mih/.mixa -> .mvm
+0000: PUSH "Misha"
+0001: STORE "name"
+0002: PUSH "Hello "
+0003: LOAD "name"
+0004: ADD
+0005: PUSH "!"
+0006: ADD
+0007: PRINTLN
+0008: PUSH 5
+0009: STORE "a"
+0010: PUSH 3
+0011: STORE "b"
+0012: PUSH "5+3="
+0013: LOAD "a"
+0014: LOAD "b"
+0015: ADD
+0016: ADD
+0017: PRINTLN
+0018: PUSH "OK"
+0019: PRINTLN
+0020: EXIT

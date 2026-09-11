@@ -1,0 +1,44 @@
+package libs
+
+// libs/MathD3.mih - 3D математика + 3D рендер (отдельно)
+// import libs.MathD3  или  import libs.*
+
+pub cls MathD3 {
+    var x
+    var y
+    var z
+    pub MathD3(float x, float y, float z) { this.x=x this.y=y this.z=z }
+    pub MathD3 add(MathD3 o) { ret MathD3(x+o.x, y+o.y, z+o.z) }
+    pub MathD3 sub(MathD3 o) { ret MathD3(x-o.x, y-o.y, z-o.z) }
+    pub MathD3 mul(float s) { ret MathD3(x*s, y*s, z*s) }
+    pub float len() { ret sqrt(x*x + y*y + z*z) }
+    pub MathD3 norm() { var l=len() ret l==0 ? MathD3(0,0,0) : MathD3(x/l, y/l, z/l) }
+    pub float dot(MathD3 o) { ret x*o.x + y*o.y + z*o.z }
+    pub MathD3 cross(MathD3 o) { ret MathD3(y*o.z - z*o.y, z*o.x - x*o.z, x*o.y - y*o.x) }
+    pub MathD3 rotate(float rx, float ry, float rz) {
+        // упрощенный поворот вокруг Y
+        var cosY = 0.99
+        var sinY = 0.14
+        ret MathD3(x*cosY - z*sinY, y, x*sinY + z*cosY)
+    }
+}
+
+pub cls Camera3D {
+    var pos
+    var target
+    pub Camera3D(MathD3 pos, MathD3 target) { this.pos=pos this.target=target }
+    pub noret rotate(float rx, float ry, float rz) { pos = pos.rotate(rx,ry,rz) }
+}
+
+pub Camera3D camera(MathD3 pos, MathD3 target) { ret Camera3D(pos, target) }
+pub MathD3 Vec3(float x, float y, float z) { ret MathD3(x,y,z) }
+
+// 3D рендер
+pub noret clear3D(int color) { print("clear3D {color}") }
+pub noret Cube(float x, float y, float z, float size, int color) {
+    print("Cube {x},{y},{z} s={size} c={color}")
+}
+pub noret CubeEx(float x, float y, float z, float w, float h, float d, int color) {
+    print("CubeEx {x},{y},{z} {w}x{h}x{d}")
+}
+pub noret Sphere(float x, float y, float z, float r, int color) { print("Sphere {x},{y},{z} r={r}") }

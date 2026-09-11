@@ -1,0 +1,85 @@
+// random_game.mix - тестовая игра на Misha, проверяет ВСЕ рандомы и фишки
+// Запуск: java -cp mvm/target mvm.MVM random_game.mvm
+var title = "=== Misha Random Game ==="
+print(title)
+print("Тест всех рандомов и встроенных:")
+
+// 10. математика
+print("sum(5,3) = {sum(5,3)}")
+print("pow(2,3) = {pow(2,3)}")
+print("sqrt(16) = {sqrt(16)}")
+print("min/max {min(5,3)} {max(5,3)}")
+
+// строки
+var txt = "Hello"
+print("upper {upper(txt)}")
+print("lower {lower(txt)}")
+print("len Hello {strlen(txt)}")
+
+// массивы
+var nums = [1,2,3,4,5]
+print("nums {nums} len {len(nums)} first {first(nums)} last {last(nums)}")
+print("shuffle {shuffle(nums)}")
+print("reverse {reverse(nums)}")
+print("sort {sort([3,1,2])}")
+
+// рандомы - главный тест
+print("--- Рандомы ---")
+var r1 = randint(10)
+print("randint(10) = {r1}")
+var r2 = randint(5, 10)
+print("randint(5,10) = {r2}")
+var rf1 = randfloat()
+print("randfloat() = {rf1}")
+var rf2 = randfloat(5.0)
+print("randfloat(5.0) = {rf2}")
+var rf3 = randfloat(1.5, 4.5)
+print("randfloat(1.5,4.5) = {rf3}")
+var ch = choice([1,2,3])
+print("choice([1,2,3]) = {ch}")
+var ch2 = choice("Привет")
+print("choice(Привет) = {ch2}")
+var chs = choices([1,2,3], 2)
+print("choices([1,2,3],2) = {chs}")
+var sh = shuffle([1,2,3,4])
+print("shuffle([1,2,3,4]) = {sh}")
+var rb = randbool()
+print("randbool() = {rb}")
+var rc = randchar()
+print("randchar() = {rc}")
+var rs = randstring(5)
+print("randstring(5) = {rs}")
+var rr1 = randrange(5)
+print("randrange(5) = {rr1}")
+var rr2 = randrange(2, 8)
+print("randrange(2,8) = {rr2}")
+
+// игра: угадай число
+print("--- Игра: Угадай число 0..5 ---")
+var secret = randint(5)
+print("secret загадан (для теста покажем): {secret}")
+for (var i = 0; i < 3; i++) {
+    var guess = randint(5)
+    print("попытка {i}: guess={guess}")
+    if guess == secret {
+        print("Угадал!")
+    } else {
+        print("мимо")
+    }
+}
+
+// игра: бой
+print("--- Бой ---")
+var enemies = ["Гоблин","Орк","Скелет"]
+var enemy = choice(enemies)
+print("Враг: {enemy}")
+var hp = 10
+while hp > 0 {
+    var dmg = randint(3)
+    print("удар {dmg}")
+    hp = hp - dmg
+    print("hp {hp}")
+}
+print("Победа над {enemy}!")
+
+print("done random_game")

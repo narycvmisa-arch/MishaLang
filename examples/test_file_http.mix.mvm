@@ -1,0 +1,47 @@
+// MVM bytecode v1 (Misha VM)
+// .mih/.mixa -> .mvm
+0000: PUSH "=== File/Http ==="
+0001: PRINTLN
+0002: PUSH "misha_test.txt"
+0003: PUSH "Hello Misha File"
+0004: CALL "write"
+0005: POP
+0006: PUSH "write done"
+0007: PRINTLN
+0008: PUSH "misha_test.txt"
+0009: CALL "exists"
+0010: STORE "e"
+0011: PUSH "exists "
+0012: LOAD "e"
+0013: ADD
+0014: PRINTLN
+0015: PUSH "misha_test.txt"
+0016: CALL "read"
+0017: STORE "c"
+0018: PUSH "read: "
+0019: LOAD "c"
+0020: ADD
+0021: PRINTLN
+0022: PUSH "misha_test.txt"
+0023: PUSH "\\nappend"
+0024: CALL "appendFile"
+0025: POP
+0026: PUSH "append done"
+0027: PRINTLN
+0028: PUSH "misha_test.txt"
+0029: CALL "read"
+0030: STORE "c2"
+0031: PUSH "read2: "
+0032: LOAD "c2"
+0033: ADD
+0034: PRINTLN
+0035: PUSH "."
+0036: CALL "listFiles"
+0037: STORE "files"
+0038: PUSH "listFiles "
+0039: LOAD "files"
+0040: ADD
+0041: PRINTLN
+0042: PUSH "done file/http"
+0043: PRINTLN
+0044: EXIT

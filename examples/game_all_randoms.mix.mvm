@@ -1,0 +1,186 @@
+// MVM bytecode v1 (Misha VM)
+// .mih/.mixa -> .mvm
+0000: PUSH "=== GAME ALL RANDOMS ==="
+0001: STORE "title"
+0002: LOAD "title"
+0003: PRINTLN
+0004: PUSH "__LIST__:[1,2,3,4,5]"
+0005: STORE "nums"
+0006: PUSH "__LIST__:[1,2,3]"
+0007: STORE "small"
+0008: PUSH "__LIST__:[\"a\",\"b\",\"c\"]"
+0009: STORE "letters"
+0010: PUSH "--- База ---"
+0011: PRINTLN
+0012: PUSH "sum "
+0013: PUSH 5
+0014: PUSH 3
+0015: ADD
+0016: ADD
+0017: PRINTLN
+0018: PUSH "pow "
+0019: PUSH 2
+0020: PUSH 3
+0021: CALL "pow"
+0022: ADD
+0023: PRINTLN
+0024: PUSH "len nums "
+0025: LOAD "nums"
+0026: CALL "len"
+0027: ADD
+0028: PRINTLN
+0029: PUSH "shuffle nums "
+0030: LOAD "nums"
+0031: CALL "shuffle"
+0032: ADD
+0033: PRINTLN
+0034: PUSH "--- Рандомы ---"
+0035: PRINTLN
+0036: PUSH 10
+0037: CALL "randint"
+0038: STORE "r1"
+0039: PUSH "randint(10)="
+0040: LOAD "r1"
+0041: ADD
+0042: PRINTLN
+0043: PUSH 5
+0044: PUSH 10
+0045: CALL "randint"
+0046: STORE "r2"
+0047: PUSH "randint(5,10)="
+0048: LOAD "r2"
+0049: ADD
+0050: PRINTLN
+0051: CALL "randfloat"
+0052: STORE "rf0"
+0053: PUSH "randfloat()="
+0054: LOAD "rf0"
+0055: ADD
+0056: PRINTLN
+0057: PUSH 5.0
+0058: CALL "randfloat"
+0059: STORE "rf1"
+0060: PUSH "randfloat(5)="
+0061: LOAD "rf1"
+0062: ADD
+0063: PRINTLN
+0064: PUSH 1.5
+0065: PUSH 4.5
+0066: CALL "randfloat"
+0067: STORE "rf2"
+0068: PUSH "randfloat(1.5,4.5)="
+0069: LOAD "rf2"
+0070: ADD
+0071: PRINTLN
+0072: LOAD "small"
+0073: CALL "choice"
+0074: STORE "ch"
+0075: PUSH "choice small="
+0076: LOAD "ch"
+0077: ADD
+0078: PRINTLN
+0079: PUSH "abcdef"
+0080: CALL "choice"
+0081: STORE "chs"
+0082: PUSH "choice str="
+0083: LOAD "chs"
+0084: ADD
+0085: PRINTLN
+0086: LOAD "small"
+0087: CALL "shuffle"
+0088: STORE "sh"
+0089: PUSH "shuffle small="
+0090: LOAD "sh"
+0091: ADD
+0092: PRINTLN
+0093: CALL "randbool"
+0094: STORE "rb"
+0095: PUSH "randbool="
+0096: LOAD "rb"
+0097: ADD
+0098: PRINTLN
+0099: CALL "randchar"
+0100: STORE "rc"
+0101: PUSH "randchar="
+0102: LOAD "rc"
+0103: ADD
+0104: PRINTLN
+0105: PUSH 5
+0106: CALL "randstring"
+0107: STORE "rs"
+0108: PUSH "randstring5="
+0109: LOAD "rs"
+0110: ADD
+0111: PRINTLN
+0112: PUSH 5
+0113: CALL "randrange"
+0114: STORE "rr1"
+0115: PUSH "randrange5="
+0116: LOAD "rr1"
+0117: ADD
+0118: PRINTLN
+0119: PUSH 2
+0120: PUSH 8
+0121: CALL "randrange"
+0122: STORE "rr2"
+0123: PUSH "randrange 2-8="
+0124: LOAD "rr2"
+0125: ADD
+0126: PRINTLN
+0127: PUSH "--- Мини-игра ---"
+0128: PRINTLN
+0129: PUSH 5
+0130: CALL "randint"
+0131: STORE "secret"
+0132: PUSH "secret 0..5 загадан"
+0133: PRINTLN
+0134: PUSH 0
+0135: STORE "i"
+0136: LABEL "Lloop0"
+0137: LOAD "i"
+0138: PUSH 3
+0139: LT
+0140: CJMP "Lend0"
+0141: PUSH 5
+0142: CALL "randint"
+0143: STORE "guess"
+0144: PUSH "guess "
+0145: LOAD "guess"
+0146: ADD
+0147: PUSH " vs secret "
+0148: ADD
+0149: LOAD "secret"
+0150: ADD
+0151: PRINTLN
+0152: LOAD "guess"
+0153: LOAD "secret"
+0154: EQ
+0155: CJMP "Lelse1"
+0156: PUSH "win!"
+0157: PRINTLN
+0158: LABEL "Lelse1"
+0159: LABEL "Lend2"
+0160: LOAD "guess"
+0161: LOAD "secret"
+0162: NE
+0163: CJMP "Lelse3"
+0164: PUSH "miss"
+0165: PRINTLN
+0166: LABEL "Lelse3"
+0167: LABEL "Lend4"
+0168: LOAD "i"
+0169: PUSH 1
+0170: ADD
+0171: STORE "i"
+0172: JMP "Lloop0"
+0173: LABEL "Lend0"
+0174: LOAD "letters"
+0175: CALL "choice"
+0176: STORE "enemy"
+0177: PUSH "enemy "
+0178: LOAD "enemy"
+0179: ADD
+0180: PRINTLN
+0181: PUSH "done"
+0182: PRINTLN
+0183: EXIT

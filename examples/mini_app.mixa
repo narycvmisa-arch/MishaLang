@@ -1,0 +1,44 @@
+// mini_app.mixa — 2D/3D FPS демо на Misha (.mixa)
+package demo.mini
+
+import libs.*
+
+var win = createWindow2D(40, 12)
+var frames = 0
+var last = millis()
+var fps = 30
+
+lambda myLerp(a, b, t) { ret a + (b - a) * t }
+var add = (x, y) -> x + y
+
+var cam = camera(MathD3(0,0,5), MathD3(0,0,0))
+print("camera {cam}")
+
+var f=0
+while win.shouldClose() == false {
+  clear2D(win, 0)
+  clear3D(0)
+  for item : [1,2,3] {
+    Rect2D(win, randint(35), randint(9), 3, 1, randint(3)+1)
+  }
+  var t = (f % 20) / 20.0
+  var x = myLerp(0, 35, t)
+  Rect2D(win, x, 5, 5, 1, 2)
+  // раздельные HQ кубы: красный слева, зелёный справа, синяя сфера сверху
+  Cube(-2.6, 0.3, 3.2, 2.4, 0xFF4040)
+  CubeEx(2.6, 0.3, 3.2, 2.4, 2.4, 2.4, 0x40FF50)
+  Sphere(0, 2.4, 3.5, 1.4, 0x4090FF)
+  var v1 = MathD3(1,2,3)
+  print("v1 {v1}")
+  frames = frames + 1
+  var now = millis()
+  var dt = now - last
+  if dt > 0 { fps = 1000 / dt }
+  last = now
+  Text2D(win, "FPS:{fps} F:{frames} X:{x}", 0, 0)
+  swapBuffers2D(win)
+  print("frame {frames} fps:{fps} x:{x} add:{add(2,3)}")
+  sleep(30)
+  f = f + 1
+}
+print("done win {win.w}x{win.h} frames:{frames}")

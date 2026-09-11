@@ -1,0 +1,16 @@
+// Token.mih - токены для MVM (см. спеку 18. SELF-HOSTING)
+package compiler.lexer
+
+pub cls Token {
+    pub str type
+    pub str lexeme
+    pub int line
+    pub int col
+
+    pub Token(str t, str lex, int l, int c) {
+        this.type = t
+        this.lexeme = lex
+        this.line = l
+        this.col = c
+    }
+}

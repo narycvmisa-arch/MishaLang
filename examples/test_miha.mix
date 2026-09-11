@@ -1,0 +1,6 @@
+pub cls Test {
+    var name = "miha"
+    pub stat noret testprint() {
+        print(name)
+    }
+}

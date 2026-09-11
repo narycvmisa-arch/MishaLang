@@ -1,0 +1,69 @@
+// mini_app_fixed.mixa — исправленный тест собственного рендеринга 2D/3D
+// Фиксы: hex цвета 0xRRGGBB, координаты 3D (CubeEx/Sphere), размер окна без огромной рамки, while с shouldClose, собственный рендеринг через win.pixels
+package demo.mini
+
+import libs.*
+
+// увеличено для лучшего обзора, было 40x12
+var win = createWindow2D(48, 16)
+var frames = 0
+var last = millis()
+var fps = 30
+
+lambda myLerp(a, b, t) { ret a + (b - a) * t }
+var add = (x, y) -> x + y
+
+var cam = camera(MathD3(0,0,5), MathD3(0,0,0))
+print("camera {cam} win {win.w}x{win.h}")
+
+var f=0
+while win.shouldClose() == false {
+  clear2D(win, 0)
+  clear3D(0)
+
+  // --- собственный рендеринг: градиент фона через прямую работу с пикселями ---
+  // демонстрируем, что win.pixels теперь синхронизируется с BufferedImage через setAt
+  // заливка верхней строки градиентом (x от 0 до win.w)
+  // for y=0..1 заливка demo-пикселями напрямую
+  for py : [0,1] {
+    for px : [0,1,2,3,4,5,6,7,8,9] {
+      if px < win.w && py < win.h {
+        var idx = py * win.w + px
+        // цвет 0x101030 + px*0x110000 — красный градиент для видимости
+        var col = 0x101030 + px * 0x080000
+        setAt(win.pixels, idx, col)
+      }
+    }
+  }
+
+  // 3 случайных прямоугольника через API
+  for item : [1,2,3] {
+    Rect2D(win, randint(44), randint(13), 3, 1, randint(3)+1)
+  }
+
+  // движущийся прямоугольник через lerp
+  var t = (f % 20) / 20.0
+  var x = myLerp(0, 42, t)
+  Rect2D(win, x, 6, 5, 2, 2)
+
+  // 3D: раздельные HQ кубы — красный слева, зелёный справа, синяя сфера сверху
+  Cube(-2.6, 0.3, 3.2, 2.6, 0xFF4040)
+  CubeEx(2.6, 0.3, 3.2, 2.6, 2.6, 2.6, 0x40FF50)
+  Sphere(0, 2.4, 3.5, 1.6, 0x4090FF)
+
+  // проверка 3D математики
+  var v1 = MathD3(1,2,3)
+  if f % 30 == 0 { print("v1 {v1} frame {f}") }
+
+  frames = frames + 1
+  var now = millis()
+  var dt = now - last
+  if dt > 0 { fps = 1000 / dt }
+  last = now
+  Text2D(win, "FPS:{fps} F:{frames} X:{x}", 0, 0)
+  swapBuffers2D(win)
+  if f % 20 == 0 { print("frame {frames} fps:{fps} x:{x} add:{add(2,3)}") }
+  sleep(30)
+  f = f + 1
+}
+print("done win {win.w}x{win.h} frames:{frames} f:{f}")

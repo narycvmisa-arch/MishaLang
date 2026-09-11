@@ -1,0 +1,21 @@
+// test_new.mix - тест новых фич: match, File I/O, ?. ??
+var x = 2
+match x {
+    1 -> print("one")
+    2 -> print("two")
+    _ -> print("other")
+}
+
+var txt = "hello"
+print("txt?.length = {txt?.length()}")
+var maybe = null
+print("maybe ?? txt = {maybe ?? txt}")
+
+// File I/O
+write("test_misha.txt", "Hello Misha File")
+print("write done")
+var content = read("test_misha.txt")
+print("read: {content}")
+print("exists {exists(\"test_misha.txt\")}")
+
+print("done new")

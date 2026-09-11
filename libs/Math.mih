@@ -1,0 +1,51 @@
+package libs
+
+// libs/Math.mih - формулы и математические лямбды (отдельно, не 3+2)
+// Использование: import libs.Math  или  import libs.*
+// Math.sum, Math.avg, Math.lerp, Math.quad и т.д. как лямбды
+
+pub cls Math {
+    // базовые как лямбды
+    pub stat var sum = (a, b) -> a + b
+    pub stat var sub = (a, b) -> a - b
+    pub stat var mult = (a, b) -> a * b
+    pub stat var div = (a, b) -> a / b
+    pub stat var pow = (a, b) -> pow(a, b)
+    pub stat var sqrt = (a) -> sqrt(a)
+
+    // формулы
+    pub stat float lerp(float a, float b, float t) { ret a + (b - a) * t }
+    pub stat float clamp(float v, float min, float max) { ret v < min ? min : (v > max ? max : v) }
+    pub stat float map(float v, float inMin, float inMax, float outMin, float outMax) {
+        ret outMin + (v - inMin) * (outMax - outMin) / (inMax - inMin)
+    }
+    pub stat float quad(float a, float b, float c) {
+        // дискриминант, возвращает больший корень
+        var d = b*b - 4*a*c
+        if d < 0 { ret 0 }
+        ret (-b + sqrt(d)) / (2*a)
+    }
+    pub stat float integral(var fn, float a, float b) {
+        // численный интеграл трапециями 100 шагов, fn лямбда
+        var sum = 0
+        var n = 100
+        var h = (b - a) / n
+        for (var i=0; i<n; i++) {
+            var x1 = a + i*h
+            var x2 = a + (i+1)*h
+            // fn как лямбда: fn(x)
+            sum = sum + (fn(x1) + fn(x2)) * h / 2
+        }
+        ret sum
+    }
+    pub stat float derivative(var fn, float x) {
+        var h = 0.0001
+        ret (fn(x+h) - fn(x-h)) / (2*h)
+    }
+    // применение лямбды к массиву
+    pub stat var apply = (arr, fn) -> {
+        var out = []
+        for item : arr { out.add(fn(item)) }
+        ret out
+    }
+}

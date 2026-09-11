@@ -1,0 +1,39 @@
+// MVM bytecode v1 (Misha VM)
+// .mih/.mixa -> .mvm
+0000: PUSH 40
+0001: PUSH 12
+0002: CALL "createWindow2D"
+0003: STORE "win"
+0004: LOAD "win"
+0005: PUSH 0
+0006: CALL "clear2D"
+0007: POP
+0008: LOAD "win"
+0009: PUSH 5
+0010: PUSH 5
+0011: PUSH 10
+0012: PUSH 2
+0013: PUSH 1
+0014: CALL "Rect2D"
+0015: POP
+0016: LOAD "win"
+0017: PUSH "test"
+0018: PUSH 0
+0019: PUSH 0
+0020: CALL "Text2D"
+0021: POP
+0022: LOAD "win"
+0023: CALL "swapBuffers2D"
+0024: POP
+0025: PUSH 3000
+0026: CALL "sleep"
+0027: POP
+0028: PUSH "done test_rect win "
+0029: LOAD "win.w"
+0030: ADD
+0031: PUSH "x"
+0032: ADD
+0033: LOAD "win.h"
+0034: ADD
+0035: PRINTLN
+0036: EXIT

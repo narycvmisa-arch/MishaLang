@@ -1,0 +1,10 @@
+pub cls Test {
+    pub noret main() {
+        var name = "Misha"
+        print("Hello {name}!")
+        var a = 5
+        var b = 3
+        print("5+3={a + b}")
+        print("OK")
+    }
+}

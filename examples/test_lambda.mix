@@ -1,0 +1,16 @@
+// test lambda без -> (новый 6-букв) + старый var fn -> остается без lambda
+lambda getChoice() {
+    var t = [1,2,3]
+    ret choice(t)
+}
+lambda sum(a,b) {
+    ret a + b
+}
+
+var x = getChoice()
+print("getChoice()={x}")
+
+var y = sum(5,3)
+print("sum(5,3)={y}")
+
+print("done lambda test")

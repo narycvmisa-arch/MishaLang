@@ -1,0 +1,29 @@
+package libs
+
+// libs/Random.mih - отдельная библиотека рандома (randint и т.д.)
+// import libs.Random  или  import libs.*
+
+pub cls Random {
+    pub stat int intRand(int max) { ret randint(max) }
+    pub stat int range(int a, int b) { ret randint(a,b) }
+    pub stat float floatRand() { ret randfloat() }
+    pub stat float floatRange(float a, float b) { ret randfloat(a,b) }
+    pub stat var choiceRand(var arr) { ret choice(arr) }
+    pub stat var choicesRand(var arr, int n) { ret choices(arr, n) }
+    pub stat var shuffleRand(var arr) { ret shuffle(arr) }
+    pub stat bool boolRand() { ret randbool() }
+    pub stat str charRand() { ret randchar() }
+    pub stat str stringRand(int n) { ret randstring(n) }
+    pub stat int rangeRand(int n) { ret randrange(n) }
+    pub stat int range2Rand(int a, int b) { ret randrange(a,b) }
+}
+
+// удобные алиасы без Math. префикса (как в спеке 10)
+pub int randint(int max) { ret Random.intRand(max) }
+pub int randint2(int a, int b) { ret Random.range(a,b) }
+pub float randfloat() { ret Random.floatRand() }
+pub var choice(var a) { ret Random.choiceRand(a) }
+pub var shuffle(var a) { ret Random.shuffleRand(a) }
+pub bool randbool() { ret Random.boolRand() }
+pub str randchar() { ret Random.charRand() }
+pub str randstring(int n) { ret Random.stringRand(n) }

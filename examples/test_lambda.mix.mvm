@@ -1,0 +1,40 @@
+// MVM bytecode v1 (Misha VM)
+// .mih/.mixa -> .mvm
+0000: JMP "Lend_lambda_getChoice_0"
+0001: LABEL "Llambda_getChoice"
+0002: PUSH "__LIST__:[1,2,3]"
+0003: STORE "t"
+0004: LOAD "t"
+0005: CALL "choice"
+0006: RET
+0007: LABEL "Lend_lambda_getChoice_0"
+0008: PUSH "Llambda_getChoice"
+0009: STORE "getChoice"
+0010: JMP "Lend_lambda_sum_1"
+0011: LABEL "Llambda_sum"
+0012: STORE "b"
+0013: STORE "a"
+0014: LOAD "a"
+0015: LOAD "b"
+0016: ADD
+0017: RET
+0018: LABEL "Lend_lambda_sum_1"
+0019: PUSH "Llambda_sum"
+0020: STORE "sum"
+0021: CALL "getChoice"
+0022: STORE "x"
+0023: PUSH "getChoice()="
+0024: LOAD "x"
+0025: ADD
+0026: PRINTLN
+0027: PUSH 5
+0028: PUSH 3
+0029: ADD
+0030: STORE "y"
+0031: PUSH "sum(5,3)="
+0032: LOAD "y"
+0033: ADD
+0034: PRINTLN
+0035: PUSH "done lambda test"
+0036: PRINTLN
+0037: EXIT

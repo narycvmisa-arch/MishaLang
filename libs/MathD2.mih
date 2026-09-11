@@ -1,0 +1,45 @@
+package libs
+
+// libs/MathD2.mih - 2D математика + 2D рендер (отдельно)
+// import libs.MathD2  или  import libs.*
+
+pub cls MathD2 {
+    var x
+    var y
+    pub MathD2(float x, float y) { this.x = x this.y = y }
+    pub MathD2 add(MathD2 o) { ret MathD2(x+o.x, y+o.y) }
+    pub MathD2 sub(MathD2 o) { ret MathD2(x-o.x, y-o.y) }
+    pub MathD2 mul(float s) { ret MathD2(x*s, y*s) }
+    pub float len() { ret sqrt(x*x + y*y) }
+    pub MathD2 norm() { var l=len() ret l==0 ? MathD2(0,0) : MathD2(x/l, y/l) }
+    pub float dot(MathD2 o) { ret x*o.x + y*o.y }
+    pub MathD2 lerp(MathD2 o, float t) { ret MathD2(x+(o.x-x)*t, y+(o.y-y)*t) }
+}
+
+// 2D рендер - софт, свой, без импорта
+// Window хранит int[] pixels
+pub cls Window2D {
+    var w
+    var h
+    var pixels
+    pub Window2D(int w, int h) { this.w=w this.h=h this.pixels=alloc(w*h) }
+    pub bool shouldClose() { ret false } // заглушка для MVM
+}
+
+pub Window2D createWindow2D(int w, int h) { ret Window2D(w,h) }
+pub noret clear2D(Window2D win, int color) {
+    for (var i=0; i<win.w*win.h; i++) { win.pixels[i]=color }
+}
+pub noret Rect2D(Window2D win, float x, float y, float w, float h, int color) {
+    for (var dy=0; dy<h; dy++) {
+        for (var dx=0; dx<w; dx++) {
+            var px = x+dx
+            var py = y+dy
+            if px>=0 && px<win.w && py>=0 && py<win.h {
+                win.pixels[py*win.w+px]=color
+            }
+        }
+    }
+}
+pub noret Text2D(Window2D win, str text, float x, float y) { print(text) }
+pub noret swapBuffers2D(Window2D win) { print("swap 2D {win.w}x{win.h}") }

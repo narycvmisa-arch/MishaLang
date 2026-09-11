@@ -1,0 +1,11 @@
+// hello.mixa - альтернативное расширение .mixa (тоже Миша)
+pub cls Demo {
+    pub noret run() {
+        print("Привет из .mixa!")
+        for (var i = 0; i < 5; i++) {
+            print("i={i}")
+        }
+        var nums = [1, 2, 3]
+        print("len={len(nums)}")
+    }
+}

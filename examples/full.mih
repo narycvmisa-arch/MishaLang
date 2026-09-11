@@ -1,0 +1,167 @@
+// full.mih - полный тест всех 20 разделов спеки Misha (.mih)
+package com.misha.demo
+
+import java.util.List
+import misha.Runtime
+
+// 2. классы и 1. модификаторы
+pub cls MyClass ext Parent impl Runnable {
+    priv str name
+    stat const MAX = 100
+}
+
+// 8. аннотации
+#over
+#data
+#singleton
+#fast
+pub cls Demo {
+    // 4. методы
+    pub int calculate(int a, int b) {
+        ret a + b
+    }
+    pub noret showMessage() {
+        print("Привет из {name}")
+    }
+    // 3. переменные и типы
+    var autoStr = "lol"
+    var autoInt = 10
+    var autoFloat = 10.5
+    var String explicit = "test"
+    str s = "hi"
+    flt f = 10.5
+    const NAME = "misha"
+
+    pub noret testAll() {
+        // 5. условные
+        var age = 20
+        if age > 18 {
+            print("Взрослый")
+        }
+        if age > 18 {
+            print("Взрослый")
+        } else {
+            print("Ребёнок")
+        }
+        if age < 13 {
+            print("Ребёнок")
+        } elif age < 18 {
+            print("Подросток")
+        } else {
+            print("Взрослый")
+        }
+        if age > 18 -> print("ОК")
+        var status = age > 18 ? "взрослый" : "ребёнок"
+        print("status={status}")
+
+        // 6. циклы
+        for (var i = 0; i < 3; i++) {
+            print("for i={i}")
+        }
+        for item : [1,2,3] {
+            print("item={item}")
+        }
+        var w = 3
+        while w > 0 {
+            print("while {w}")
+            w = w - 1
+        }
+        do {
+            print("do-while")
+        } while false
+
+        // 7. вывод + методы строк
+        var text = " hello "
+        print("Привет {name}")
+        print(text.lower())
+        print(text.upper())
+        print(text.trim())
+        print(text.replace("l","L"))
+
+        // 9. массивы/коллекции
+        var numbers = [1, 2, 3, 4, 5]
+        var names = ["Анна", "Иван"]
+        print(numbers[0])
+        var lenNums = len(numbers)
+        print("len={lenNums}")
+        var list = List()
+        list.add("элемент")
+        var map = {"name": "Иван", "age": 25}
+        var set = Set()
+        set.add(1)
+
+        // 10. встроенные
+        print("sum={sum(5,3)}")
+        print("pow={pow(2,3)}")
+        print("sqrt={sqrt(16)}")
+        print("min={min(5,3)}")
+        print("rand={randint(10)}")
+
+        // 11. исключения
+        try {
+            var x = 10 / 0
+        } catch (Exception e) {
+            print("Ошибка: {e}")
+        } finally {
+            print("finally")
+        }
+        try {
+            print("try2")
+        } catch e {
+            print("catch e={e}")
+        }
+
+        // 12. дженерики
+        var box = Box<String>()
+        box.set("Привет")
+
+        // 13. enum
+        // 14. лямбды
+        var sumFn = (a, b) -> a + b
+        print("lambda sum={sumFn}")
+
+        // 17. память
+        var obj = alloc(100)
+        print("alloc {obj}")
+        free(obj)
+        gc()
+        print(meminfo())
+
+        // 10 random
+        print("choice={choice([1,2,3])}")
+
+        sleep(10)
+        print("done")
+    }
+}
+
+// 13. enum отдельно
+enum Color {
+    RED, GREEN, BLUE
+}
+
+// 12. дженерик класс
+pub cls Box<T> {
+    var content
+    pub noret set(T item) {
+        content = item
+    }
+    pub T get() {
+        ret content
+    }
+}
+
+// 18. шифрование + 16
+#XOR
+#BASE64
+pub cls SecureData {
+    #part
+    var code = "secret"
+}
+
+// 19. флаги
+#O3
+#inline
+pub noret fastMethod() {
+    print("fast")
+}

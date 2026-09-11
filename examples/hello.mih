@@ -1,0 +1,31 @@
+// hello.mih - первый файл на языке Миша (Misha) для MVM
+// Компиляция: java compiler.BootstrapCompiler examples/hello.mih -o examples/hello.mvm
+// Запуск: java mvm.MVM examples/hello.mvm
+package demo
+
+pub cls Hello ext Object {
+    pub noret main() {
+        var name = "Миша"
+        var age = 17
+        var lang = "Misha"
+        print("Привет {name}, тебе {age} лет!")
+        print("Язык: {lang} (.mih/.mixa) -> MVM")
+        print("2 + 3 = {2 + 3}")
+        var a = 10
+        var b = 5
+        var c = sum(a, b)
+        print("sum({a},{b}) = {c}")
+        if age > 18 {
+            print("Взрослый")
+        } elif age > 13 {
+            print("Подросток")
+        } else {
+            print("Ребёнок")
+        }
+        // тест типов из спеки 3.
+        var str name2 = "lol"
+        var int count = 10
+        const MAX = 100
+        print("MAX={MAX}, name2={name2}")
+    }
+}

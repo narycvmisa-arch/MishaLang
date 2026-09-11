@@ -1,0 +1,208 @@
+// MVM bytecode v1 (Misha VM)
+// .mih/.mixa -> .mvm
+0000: PUSH 100
+0001: STORE "MAX"
+0002: LOAD "a"
+0003: LOAD "b"
+0004: ADD
+0005: RET
+0006: PUSH "Привет из "
+0007: LOAD "name"
+0008: ADD
+0009: PRINTLN
+0010: PUSH "lol"
+0011: STORE "autoStr"
+0012: PUSH 10
+0013: STORE "autoInt"
+0014: PUSH 10.5
+0015: STORE "autoFloat"
+0016: PUSH "misha"
+0017: STORE "NAME"
+0018: PUSH 20
+0019: STORE "age"
+0020: LOAD "age"
+0021: PUSH 18
+0022: GT
+0023: CJMP "Lelse0"
+0024: PUSH "Взрослый"
+0025: PRINTLN
+0026: LOAD "age"
+0027: PUSH 18
+0028: GT
+0029: CJMP "Lelse2"
+0030: PUSH "Взрослый"
+0031: PRINTLN
+0032: PUSH "Ребёнок"
+0033: PRINTLN
+0034: LOAD "age"
+0035: PUSH 13
+0036: LT
+0037: CJMP "Lelse4"
+0038: PUSH "Ребёнок"
+0039: PRINTLN
+0040: PUSH "Подросток"
+0041: PRINTLN
+0042: PUSH "Взрослый"
+0043: PRINTLN
+0044: LOAD "age"
+0045: PUSH 18
+0046: GT
+0047: LOAD ">print(\"ОК\""
+0048: SUB
+0049: CJMP "Lelse6"
+0050: LOAD "age"
+0051: LOAD "18 ? \"взрослый\" : \"ребёнок\""
+0052: GT
+0053: STORE "status"
+0054: PUSH "status="
+0055: LOAD "status"
+0056: ADD
+0057: PRINTLN
+0058: LOAD "0; i"
+0059: LOAD "3; i"
+0060: LT
+0061: LOAD "+) {"
+0062: ADD
+0063: STORE "i"
+0064: PUSH "for i="
+0065: LOAD "i"
+0066: ADD
+0067: PRINTLN
+0068: PUSH "FOR not implemented in v1 - use while+if"
+0069: PUSH "item="
+0070: LOAD "item"
+0071: ADD
+0072: PRINTLN
+0073: PUSH 3
+0074: STORE "w"
+0075: PUSH "FOR not implemented in v1 - use while+if"
+0076: PUSH "while "
+0077: LOAD "w"
+0078: ADD
+0079: PRINTLN
+0080: LOAD "w"
+0081: PUSH 1
+0082: SUB
+0083: STORE "w"
+0084: PUSH "do-while"
+0085: PRINTLN
+0086: PUSH " hello "
+0087: STORE "text"
+0088: PUSH "Привет "
+0089: LOAD "name"
+0090: ADD
+0091: PRINTLN
+0092: LOAD "text.lower("
+0093: PRINTLN
+0094: LOAD "text.upper("
+0095: PRINTLN
+0096: LOAD "text.trim("
+0097: PRINTLN
+0098: LOAD "text.replace(\"l\",\"L\""
+0099: PRINTLN
+0100: LOAD "[1, 2, 3, 4, 5]"
+0101: STORE "numbers"
+0102: LOAD "[\"Анна\", \"Иван\"]"
+0103: STORE "names"
+0104: LOAD "numbers[0]"
+0105: PRINTLN
+0106: LOAD "numbers"
+0107: CALL "len"
+0108: STORE "lenNums"
+0109: PUSH "len="
+0110: LOAD "lenNums"
+0111: ADD
+0112: PRINTLN
+0113: CALL "List"
+0114: STORE "list"
+0115: LOAD "{\"name\": \"Иван\", \"age\": 25}"
+0116: STORE "map"
+0117: CALL "Set"
+0118: STORE "set"
+0119: PUSH "sum="
+0120: PUSH 5
+0121: PUSH 3
+0122: ADD
+0123: ADD
+0124: PRINTLN
+0125: PUSH "pow="
+0126: PUSH 2
+0127: PUSH 3
+0128: CALL "pow"
+0129: ADD
+0130: PRINTLN
+0131: PUSH "sqrt="
+0132: PUSH 16
+0133: CALL "sqrt"
+0134: ADD
+0135: PRINTLN
+0136: PUSH "min="
+0137: PUSH 5
+0138: PUSH 3
+0139: CALL "min"
+0140: ADD
+0141: PRINTLN
+0142: PUSH "rand="
+0143: PUSH 10
+0144: CALL "randint"
+0145: ADD
+0146: PRINTLN
+0147: PUSH 10
+0148: PUSH 0
+0149: DIV
+0150: STORE "x"
+0151: PUSH "Ошибка: "
+0152: LOAD "e"
+0153: ADD
+0154: PRINTLN
+0155: PUSH "finally"
+0156: PRINTLN
+0157: PUSH "try2"
+0158: PRINTLN
+0159: PUSH "catch e="
+0160: LOAD "e"
+0161: ADD
+0162: PRINTLN
+0163: LOAD "Box"
+0164: LOAD "String"
+0165: LOAD "()"
+0166: GT
+0167: LT
+0168: STORE "box"
+0169: LOAD "(a, b)"
+0170: LOAD "> a"
+0171: SUB
+0172: LOAD "b"
+0173: ADD
+0174: STORE "sumFn"
+0175: PUSH "lambda sum="
+0176: LOAD "sumFn"
+0177: ADD
+0178: PRINTLN
+0179: PUSH 100
+0180: CALL "alloc"
+0181: STORE "obj"
+0182: PUSH "alloc "
+0183: LOAD "obj"
+0184: ADD
+0185: PRINTLN
+0186: LOAD "meminfo("
+0187: PRINTLN
+0188: PUSH "choice="
+0189: LOAD "[1"
+0190: PUSH 2
+0191: LOAD "3]"
+0192: CALL "choice"
+0193: ADD
+0194: PRINTLN
+0195: PUSH "done"
+0196: PRINTLN
+0197: LOAD "item"
+0198: STORE "content"
+0199: LOAD "content"
+0200: RET
+0201: PUSH "secret"
+0202: STORE "code"
+0203: PUSH "fast"
+0204: PRINTLN
+0205: EXIT

@@ -1,0 +1,72 @@
+// MVM bytecode v1 (Misha VM)
+// .mih/.mixa -> .mvm
+0000: PUSH 2
+0001: STORE "x"
+0002: LOAD "x"
+0003: DUP
+0004: PUSH 1
+0005: EQ
+0006: CJMP "LmatchNext1"
+0007: POP
+0008: PUSH "one"
+0009: PRINTLN
+0010: JMP "LmatchEnd0"
+0011: LABEL "LmatchNext1"
+0012: DUP
+0013: PUSH 2
+0014: EQ
+0015: CJMP "LmatchNext2"
+0016: POP
+0017: PUSH "two"
+0018: PRINTLN
+0019: JMP "LmatchEnd0"
+0020: LABEL "LmatchNext2"
+0021: POP
+0022: PUSH "other"
+0023: PRINTLN
+0024: JMP "LmatchEnd0"
+0025: POP
+0026: LABEL "LmatchEnd0"
+0027: PUSH "hello"
+0028: STORE "txt"
+0029: PUSH "txt?.length = "
+0030: LOAD "txt"
+0031: CALL "length"
+0032: ADD
+0033: PRINTLN
+0034: PUSH
+0035: STORE "maybe"
+0036: PUSH "maybe ?? txt = "
+0037: LOAD "maybe"
+0038: DUP
+0039: PUSH
+0040: NE
+0041: CJMP "LcoalesceR6506995818600"
+0042: JMP "LcoalesceE6507001202600"
+0043: LABEL "LcoalesceR6506995818600"
+0044: POP
+0045: LOAD "txt"
+0046: LABEL "LcoalesceE6507001202600"
+0047: ADD
+0048: PRINTLN
+0049: PUSH "test_misha.txt"
+0050: PUSH "Hello Misha File"
+0051: CALL "write"
+0052: POP
+0053: PUSH "write done"
+0054: PRINTLN
+0055: PUSH "test_misha.txt"
+0056: CALL "read"
+0057: STORE "content"
+0058: PUSH "read: "
+0059: LOAD "content"
+0060: ADD
+0061: PRINTLN
+0062: PUSH "exists "
+0063: PUSH "test_misha.txt"
+0064: CALL "exists"
+0065: ADD
+0066: PRINTLN
+0067: PUSH "done new"
+0068: PRINTLN
+0069: EXIT

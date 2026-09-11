@@ -1,0 +1,8 @@
+import libs.*
+var win = createWindow2D(40, 12)
+clear2D(win, 0)
+Rect2D(win, 5, 5, 10, 2, 1)
+Text2D(win, "test", 0, 0)
+swapBuffers2D(win)
+sleep(3000)
+print("done test_rect win {win.w}x{win.h}")

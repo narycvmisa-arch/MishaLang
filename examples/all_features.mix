@@ -1,0 +1,150 @@
+// all_features.mix - демо проект на .mix со ВСЕМИ фишками Misha 20 разделов (MVM-валидный, мультистрочный)
+// Сборка: java -cp mvm/target compiler.BootstrapCompiler examples/all_features.mix -o examples/all_features.mvm
+// Запуск: java -cp mvm/target mvm.MVM examples/all_features.mvm
+package com.misha.demo
+
+import java.util.List
+import misha.Runtime
+
+// 1+2 классы
+pub cls Demo ext Object impl Runnable {
+    priv str name = "Misha"
+    prot int age = 17
+    stat const VER = "1.0"
+}
+
+// 8 аннотации
+#over
+#data
+#singleton
+#fast
+#cache
+#XOR
+#BASE64
+#O3
+#inline
+pub cls AllDemo {
+    pub int calc(int a, int b) {
+        ret a + b
+    }
+    pub noret hello() {
+        print("hi")
+    }
+    pub noret runAll() {
+        // 3 переменные
+        var s1 = "lol"
+        var i1 = 10
+        var f1 = 10.5
+        var String exp = "test"
+        str s = "hi"
+        flt f = 10.5
+        const MAX = 100
+        print("vars {s1} {i1} {exp}")
+
+        // 5 условные - мультистрочные для MVM
+        var age = 20
+        if age > 18 {
+            print("adult")
+        }
+        if age > 18 {
+            print("adult2")
+        } else {
+            print("kid")
+        }
+        if age < 13 {
+            print("kid")
+        } elif age < 18 {
+            print("teen")
+        } else {
+            print("adult")
+        }
+        if age > 18 {
+            print("OK")
+        }
+        var st = age > 18 ? "yes" : "no"
+        print("ternary {st}")
+
+        // 6 циклы - мультистрочные
+        for (var i = 0; i < 3; i++) {
+            print("for {i}")
+        }
+        var w = 2
+        while w > 0 {
+            print("while {w}")
+            w = w - 1
+        }
+        do {
+            print("do")
+        } while false
+
+        // 7 строки
+        var txt = " Hello "
+        print("hi {s1}")
+        print(txt.lower())
+        print(txt.upper())
+        print(txt.trim())
+        print(txt.replace("l","L"))
+        print("a\nb\tc")
+
+        // 9 массивы
+        var nums = [1,2,3,4,5]
+        print("nums len {len(nums)}")
+        var lst = List()
+        lst.add("x")
+        var mp = Map()
+        mp.put("k","v")
+        var st2 = Set()
+        st2.add(1)
+
+        // 10 встроенные
+        print("sum {sum(5,3)}")
+        print("pow {pow(2,3)}")
+        print("sqrt {sqrt(16)}")
+        print("min {min(5,3)}")
+        print("len {len([1,2,3])}")
+        print("rand {randint(10)}")
+        print("choice {choice([1,2,3])}")
+
+        // 11 исключения (MVM заглушка, Java полный)
+        try {
+            var x = 10 / 0
+        } catch (Exception e) {
+            print("catch {e}")
+        } finally {
+            print("finally")
+        }
+
+        // 12 дженерики
+        var box = Box<String>()
+        box.set("hi")
+        print("box {box.get()}")
+
+        // 14 лямбды
+        var fn = (a, b) -> a + b
+        print("fn {fn}")
+
+        // 17 память
+        var mem = alloc(10)
+        print("alloc {mem}")
+        free(mem)
+        gc()
+        print(meminfo())
+
+        sleep(5)
+        print("done .mix")
+    }
+}
+
+// 12 дженерик + 13 enum
+pub cls Box<T> {
+    var content
+    pub noret set(T v) { content = v }
+    pub T get() { ret content }
+}
+enum Color { RED, GREEN, BLUE }
+
+// 16 распределенный ключ
+#part
+pub cls Part1 { var a = "mod" }
+#mosn
+pub cls Part2 { var b = "secret" }

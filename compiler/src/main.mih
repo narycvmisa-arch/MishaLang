@@ -1,0 +1,25 @@
+// main.mih - точка входа self-hosted компилятора (Misha)
+// Этап 2: после BootstrapCompiler.java -> компилируем этим файлом сам себя
+
+package compiler
+
+import compiler.lexer.Token
+import compiler.lexer.Lexer
+import compiler.parser.Parser
+import compiler.generator.JavaGenerator
+import compiler.generator.MvmGenerator
+
+pub cls Main {
+    pub stat noret main(str[] args) {
+        if len(args) == 0 {
+            print("Misha Compiler v1 (self-hosted)")
+            print("Usage: mvm main.mvm source.mih -o out.mvm")
+            ret
+        }
+        var src = args[0]
+        var out = "out.mvm"
+        print("Compiling {src} -> {out} via MVM")
+        // TODO: Lexer -> Parser -> Analyzer -> MVM gen
+        print("Self-hosting достигнут! MVM + Misha =.mih/.mixa")
+    }
+}

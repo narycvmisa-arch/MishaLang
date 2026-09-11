@@ -1,0 +1,83 @@
+// mini_2d3d_fps.mix — демо 2D/3D + FPS + Random + формулы + лямбды
+// Запуск: java -cp mvm/target compiler.BootstrapCompiler examples/mini_2d3d_fps.mix -o mini.mvm && java -cp mvm/target mvm.MVM mini.mvm
+// Требуется: import libs.* для Math/Random/MathD2/MathD3 (без импорта MVM даст 0 в Java-транспиле, в MVM рандом работает но формулы/окно нет)
+package demo
+
+import libs.*
+
+var win = createWindow2D(40, 12)
+var frames = 0
+var last = millis()
+var fps = 30
+
+// лямбда без -> (6 букв) и стрелочная
+lambda myLerp(a, b, t) {
+  ret a + (b - a) * t
+}
+var add = (x, y) -> x + y
+
+// формулы из libs/Math через лямбду/вызов (lerp/clamp/map)
+var demoLerp = myLerp(0, 30, 0.5)
+print("demo lerp 0->30 t=0.5 = {demoLerp}")
+var demoClamp = clamp(15, 0, 10)
+print("demo clamp 15 in 0..10 = {demoClamp}")
+var demoMap = map(5, 0, 10, 0, 100)
+print("demo map 5 0..10 -> 0..100 = {demoMap}")
+
+print("=== Mini 2D/3D FPS Demo ===")
+print("import libs.* OK: Random/Math/MathD2/MathD3")
+
+// MathD3 + Camera3D из MathD3 (Vec3 убран, юзаем MathD3 напрямую)
+var camPos = MathD3(0, 0, 5)
+var camTarget = MathD3(0, 0, 0)
+var cam = camera(camPos, camTarget)
+print("camera {cam}")
+
+var f=0
+while win.shouldClose() == false {
+  clear2D(win, 0)
+  clear3D(0)
+
+  // 2D: 3 случайных прямоугольника (Random)
+  for item : [1,2,3] {
+    var rx = randint(35)
+    var ry = randint(10)
+    var col = randint(3) + 1
+    Rect2D(win, rx, ry, 4, 1, col)
+  }
+
+  // формула lerp для движения (зациклено)
+  var t = (f % 20) / 20.0
+  var xv = myLerp(0, 34, t)
+  var yv = add(2, 1)
+  Rect2D(win, xv, yv, 5, 1, 2)
+
+  // 3D рандом кубы/сферы (Random + MathD3)
+  var cx = randfloat(5)
+  var cy = randfloat(5)
+  var cz = randfloat(5)
+  Cube(cx, cy, cz, 1, 0xFF0000)
+  CubeEx(cx+1, cy+1, cz, 2, 1, 1, 0x00FF00)
+  Sphere(2, 2, 2, 1, 0x0000FF)
+
+  // MathD3 операции (MathD2 для 2D, MathD3 для 3D)
+  var v1 = MathD3(1, 2, 3)
+  var v2 = MathD3(4, 5, 6)
+  // lerp между MathD3 через myLerp по компонентам (упрощено)
+  print("MathD3 v1 {v1} v2 {v2}")
+
+  // FPS в реальном времени
+  frames = frames + 1
+  var now = millis()
+  var dt = now - last
+  if dt > 0 { fps = 1000 / dt }
+  last = now
+  Text2D(win, "FPS:{fps} F:{frames} X:{xv}", 0, 0)
+  swapBuffers2D(win)
+  print("frame {frames} fps:{fps} xv:{xv} add:{add(2,3)} choice:{choice([1,2,3])} clamp:{demoClamp}")
+  sleep(32)
+  f = f + 1
+}
+
+print("done mini 2D/3D FPS total frames:{frames} win {win.w}x{win.h}")
+print("Random OK: {randint(10)} {randfloat(1.5, 4.5)} {choice([1,2,3])} {randchar()}")

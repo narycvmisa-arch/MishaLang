@@ -1,0 +1,60 @@
+// game_all_randoms.mix - тест ВСЕХ рандомов и фишек Misha (.mix -> MVM)
+// Все рандомы из спеки 10: randint/randfloat/choice/shuffle/randbool/randchar/randstring/randrange + хор
+var title = "=== GAME ALL RANDOMS ==="
+print(title)
+
+// массивы для тестов
+var nums = [1,2,3,4,5]
+var small = [1,2,3]
+var letters = ["a","b","c"]
+
+print("--- База ---")
+print("sum {sum(5,3)}")
+print("pow {pow(2,3)}")
+print("len nums {len(nums)}")
+print("shuffle nums {shuffle(nums)}")
+
+print("--- Рандомы ---")
+var r1 = randint(10)
+print("randint(10)={r1}")
+var r2 = randint(5, 10)
+print("randint(5,10)={r2}")
+var rf0 = randfloat()
+print("randfloat()={rf0}")
+var rf1 = randfloat(5.0)
+print("randfloat(5)={rf1}")
+var rf2 = randfloat(1.5, 4.5)
+print("randfloat(1.5,4.5)={rf2}")
+var ch = choice(small)
+print("choice small={ch}")
+var chs = choice("abcdef")
+print("choice str={chs}")
+var sh = shuffle(small)
+print("shuffle small={sh}")
+var rb = randbool()
+print("randbool={rb}")
+var rc = randchar()
+print("randchar={rc}")
+var rs = randstring(5)
+print("randstring5={rs}")
+var rr1 = randrange(5)
+print("randrange5={rr1}")
+var rr2 = randrange(2, 8)
+print("randrange 2-8={rr2}")
+
+print("--- Мини-игра ---")
+var secret = randint(5)
+print("secret 0..5 загадан")
+for (var i=0; i<3; i++) {
+    var guess = randint(5)
+    print("guess {guess} vs secret {secret}")
+    if guess == secret {
+        print("win!")
+    }
+    if guess != secret {
+        print("miss")
+    }
+}
+var enemy = choice(letters)
+print("enemy {enemy}")
+print("done")

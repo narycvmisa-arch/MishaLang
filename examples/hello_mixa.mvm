@@ -1,0 +1,29 @@
+// MVM bytecode v1 (Misha VM)
+// .mih/.mixa -> .mvm
+0000: PUSH "Привет из .mixa!"
+0001: PRINTLN
+0002: PUSH 0
+0003: STORE "i"
+0004: LABEL "Lloop0"
+0005: LOAD "i"
+0006: PUSH 5
+0007: LT
+0008: CJMP "Lend0"
+0009: PUSH "i="
+0010: LOAD "i"
+0011: ADD
+0012: PRINTLN
+0013: LOAD "i"
+0014: PUSH 1
+0015: ADD
+0016: STORE "i"
+0017: JMP "Lloop0"
+0018: LABEL "Lend0"
+0019: PUSH "__LIST__:[1,2,3]"
+0020: STORE "nums"
+0021: PUSH "len="
+0022: LOAD "nums"
+0023: CALL "len"
+0024: ADD
+0025: PRINTLN
+0026: EXIT
